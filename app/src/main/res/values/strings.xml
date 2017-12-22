@@ -3,4 +3,8 @@
     <string name="login_placeholder">Introduce tu DNI</string>
     <string name="psswd_placeholder">Introduce la contraseña</string>
     <string name="accessBtn">ACCEDER</string>
+    <string name="lessonName">Lección 1: Introducción a Android</string>
+    <string name="nTest">NUEVO TEST</string>
+    <string name="nExercise">NUEVO EJERCICIO</string>
+    <string name="assessment">SEGUIMIENTO</string>
 </resources>
