@@ -7,4 +7,10 @@
     <string name="nTest">NUEVO TEST</string>
     <string name="nExercise">NUEVO EJERCICIO</string>
     <string name="assessment">SEGUIMIENTO</string>
+    <string name="btnSend">ENVIAR</string>
+    <string name="fileSend">SUBIR FICHERO</string>
+    <string name="picTake">SACAR FOTO</string>
+    <string name="audRec">GRABAR AUDIO</string>
+    <string name="vidRec">GRABAR VÍDEO</string>
+    <string name="loginErrToast">Usuario o contraseña erróneos</string>
 </resources>
