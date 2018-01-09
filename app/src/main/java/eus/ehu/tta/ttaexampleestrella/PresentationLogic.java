@@ -6,6 +6,10 @@ package eus.ehu.tta.ttaexampleestrella;
 
 public class PresentationLogic implements PresentationIface {
 
+    public PresentationLogic(){
+
+    }
+
     @Override
     public boolean authenticateUser(String uName, String psswd){
 
@@ -43,5 +47,10 @@ public class PresentationLogic implements PresentationIface {
     }
     public String getExWording(){
         return "Explica cómo aplicarías el patrón de diseño MVP en el desarrollo de una app para Android";
+    }
+    public Test getNewTest(){
+        Test test = new Test();
+
+        return test;
     }
 }

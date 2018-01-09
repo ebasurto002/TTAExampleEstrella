@@ -13,4 +13,5 @@ public interface PresentationIface {
     public abstract boolean recordVid();
     public abstract boolean sendExercise();
     public abstract String getExWording();
+    public abstract Test getNewTest();
 }

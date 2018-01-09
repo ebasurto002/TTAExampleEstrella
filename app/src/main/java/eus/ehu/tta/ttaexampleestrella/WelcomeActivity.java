@@ -15,8 +15,9 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        this.presentation = new PresentationLogic();
         TextView welcomeText = (TextView)findViewById(R.id.welcome_text);
-        welcomeText.setText(new StringBuilder().append("Welcome ").append(this.getIntent().getStringExtra(EXTRA_LOGIN)).toString());
+        welcomeText.setText(getIntent().getStringExtra(EXTRA_LOGIN));
 
 
     }

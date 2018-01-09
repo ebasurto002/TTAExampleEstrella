@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eus.ehu.tta.ttaexampleestrella.ExerciseActivity">
+    tools:context="eus.ehu.tta.ttaexampleestrella.ExerciseActivity"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/nExWording"
         android:layout_width="match_parent"
@@ -18,7 +19,8 @@
         android:id="@+id/takePicBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/picTake"/>
+        android:text="@string/picTake"
+        android:onClick="takePicture"/>
     <Button
         android:id="@+id/audRecBtn"
         android:layout_width="match_parent"
