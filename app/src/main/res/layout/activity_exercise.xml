@@ -25,7 +25,8 @@
         android:id="@+id/audRecBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/audRec"/>
+        android:text="@string/audRec"
+        android:onClick="recordAudio"/>
     <Button
         android:id="@+id/vidRecBtn"
         android:layout_width="match_parent"

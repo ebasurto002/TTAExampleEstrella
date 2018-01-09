@@ -1,5 +1,7 @@
 package eus.ehu.tta.ttaexampleestrella;
 
+import android.net.Uri;
+
 /**
  * Created by estre on 27/12/2017.
  */
@@ -7,7 +9,7 @@ package eus.ehu.tta.ttaexampleestrella;
 public interface PresentationIface {
 
     public abstract boolean authenticateUser(String uName, String psswd);
-    public abstract boolean uploadFile();
+    public abstract boolean uploadFile(Uri uri);
     public abstract boolean takePic();
     public abstract boolean recordAud();
     public abstract boolean recordVid();

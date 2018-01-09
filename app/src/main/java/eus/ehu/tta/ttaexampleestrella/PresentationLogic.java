@@ -1,5 +1,7 @@
 package eus.ehu.tta.ttaexampleestrella;
 
+import android.net.Uri;
+
 /**
  * Created by estre on 03/01/2018.
  */
@@ -17,7 +19,7 @@ public class PresentationLogic implements PresentationIface {
     }
 
     @Override
-    public boolean uploadFile(){
+    public boolean uploadFile(Uri uri){
 
         return true;
     }
