@@ -113,7 +113,7 @@ public class TestActivity extends AppCompatActivity{
                 case "text/html":
                     showHTML();
                     break;
-                case "audio/mp3":
+                case "audio/mp4":
                     playAudio();
                     break;
                 case "video/mp4":

@@ -16,7 +16,14 @@ public class Test {
     private String mimeType;
 
 
-    public Test(){}
+    public Test(String wording, List<String> choices, int exID, int correct, String help, String mimeType){
+        this.wording=wording;
+        this.choices=choices;
+        this.exID=exID;
+        this.correct=correct;
+        this.help=help;
+        this.mimeType=mimeType;
+    }
 
     public String getWording(){
         return wording;
