@@ -5,13 +5,19 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.VideoView;
+
+import java.io.IOException;
 
 public class TestActivity extends AppCompatActivity{
 
@@ -53,10 +59,46 @@ public class TestActivity extends AppCompatActivity{
         }
     }
     public void playAudio(){
+        AudioPlayer audioPlayer = new AudioPlayer(findViewById(R.id.testLayout), new Runnable(){
+            @Override
+            public void run(){
+
+            }
+        });
+        try{
+            audioPlayer.setAudioUri(Uri.parse(test.getHelp()));
+        }
+        catch(IOException e){
+
+        }
 
     }
     public void playVideo(){
+        VideoView video = new VideoView(this);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        video.setLayoutParams(layoutParams);
+        video.setVideoURI(Uri.parse(test.getHelp()));
 
+        MediaController controller = new MediaController(this){
+            @Override
+            public void hide(){
+
+            }
+
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent event){
+                if(event.getKeyCode() == KeyEvent.KEYCODE_BACK){
+                    finish();
+                }
+                return super.dispatchKeyEvent(event);
+            }
+        };
+
+        controller.setAnchorView(video);
+        video.setMediaController(controller);
+        LinearLayout layout = (LinearLayout)findViewById(R.id.testLayout);
+        layout.addView(video);
+        video.start();
     }
 
     private class OnClickHelp implements View.OnClickListener{
