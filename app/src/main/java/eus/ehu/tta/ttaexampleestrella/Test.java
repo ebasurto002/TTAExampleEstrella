@@ -42,4 +42,20 @@ public class Test {
     public void setMimeType(String mimeType){
 
     }
+
+    public int getExID() {
+        return exID;
+    }
+
+    public void setExID(int exID) {
+        this.exID = exID;
+    }
+
+    public int getCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(int correct) {
+        this.correct = correct;
+    }
 }
