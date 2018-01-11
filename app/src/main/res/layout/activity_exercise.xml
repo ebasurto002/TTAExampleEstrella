@@ -14,7 +14,8 @@
         android:id="@+id/sendFileBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/fileSend"/>
+        android:text="@string/fileSend"
+        android:onClick="selectFile2Upload"/>
     <Button
         android:id="@+id/takePicBtn"
         android:layout_width="match_parent"

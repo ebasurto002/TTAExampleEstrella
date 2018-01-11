@@ -3,9 +3,11 @@ package eus.ehu.tta.ttaexampleestrella;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +22,7 @@ public class ExerciseActivity extends AppCompatActivity {
     private static final int PICTURE_REQUEST_CODE = 0;
     private static final int AUDIO_REQUEST_CODE = 1;
     private static final int VIDEO_REQUEST_CODE = 2;
+    private static final int READ_REQUEST_CODE = 3;
     private PresentationIface presentation;
     private Uri picUri;
 
@@ -31,6 +34,14 @@ public class ExerciseActivity extends AppCompatActivity {
         TextView exWording = (TextView)findViewById(R.id.nExWording);
         exWording.setText((CharSequence) presentation.getExWording());
     }
+
+    public void selectFile2Upload(View view){
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+        startActivityForResult(intent, READ_REQUEST_CODE);
+    }
+
 
     public void takePicture(View view){
         if(!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
@@ -94,11 +105,37 @@ public class ExerciseActivity extends AppCompatActivity {
         switch(requestCode){
             case VIDEO_REQUEST_CODE:
             case AUDIO_REQUEST_CODE:
+            case READ_REQUEST_CODE:
+                Uri uri = data.getData();
+                showMetadata(uri);
                 presentation.uploadFile(data.getData());
                 break;
             case PICTURE_REQUEST_CODE:
                 presentation.uploadFile(picUri);
                 break;
         }
+    }
+
+    public void showMetadata(Uri uri){
+        Cursor cursor = getContentResolver().query(uri,null, null, null, null, null);
+        try{
+            if(cursor != null && cursor.moveToFirst()){
+                String displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
+                String size = null;
+                if(!cursor.isNull(sizeIndex)){
+                    size = cursor.getString(sizeIndex);
+                }
+                else{
+                    size = "Unknown";
+                }
+                String message = displayName + " ("+ size +" bytes) selected";
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            }
+        }
+        finally{
+            cursor.close();
+        }
+
     }
 }
