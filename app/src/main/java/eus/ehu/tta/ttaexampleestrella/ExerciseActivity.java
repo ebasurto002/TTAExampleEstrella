@@ -39,7 +39,7 @@ public class ExerciseActivity extends AppCompatActivity {
         else{
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if(intent.resolveActivity(getPackageManager()) != null){
-                File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
                 try{
                     File file = File.createTempFile("tta",".jpg",dir);
                     picUri = Uri.fromFile(file);

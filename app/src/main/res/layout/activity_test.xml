@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="eus.ehu.tta.ttaexampleestrella.TestActivity"
-    android:id="@+id/testLayout">
+    android:id="@+id/testLayout"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/exWording"
         android:layout_width="match_parent"

@@ -31,5 +31,6 @@
         android:id="@+id/vidRecBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/vidRec"/>
+        android:text="@string/vidRec"
+        android:onClick="recordVideo"/>
 </LinearLayout>

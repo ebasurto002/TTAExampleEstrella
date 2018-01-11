@@ -15,6 +15,7 @@ import android.widget.MediaController;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class TestActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+        presentation = new PresentationLogic();
         test = presentation.getNewTest();
         TextView wording = (TextView)findViewById(R.id.exWording);
         wording.setText(test.getWording());
@@ -45,6 +47,7 @@ public class TestActivity extends AppCompatActivity{
         Button helpBtn = new Button(this);
         helpBtn.setText(R.string.helpBtn);
         helpBtn.setOnClickListener(new OnClickHelp());
+        linearLayout.addView(helpBtn);
     }
 
     public void showHTML(){
@@ -54,8 +57,10 @@ public class TestActivity extends AppCompatActivity{
             startActivity(intent);
         }
         else{
+            LinearLayout linearLayout = (LinearLayout)findViewById(R.id.testLayout);
             WebView web = new WebView(this);
             web.loadData(test.getHelp(),"text/html",null);
+            linearLayout.addView(web);
         }
     }
     public void playAudio(){
@@ -136,9 +141,11 @@ public class TestActivity extends AppCompatActivity{
                 if(button.isChecked()){
                     if(test.getCorrect() == i){
                         button.setBackgroundColor(Color.GREEN);
+                        Toast.makeText(TestActivity.this,R.string.cAns,Toast.LENGTH_SHORT).show();
                     }
                     else{
                         button.setBackgroundColor(Color.RED);
+                        Toast.makeText(TestActivity.this,R.string.fAns,Toast.LENGTH_SHORT).show();
                         createHelpButton();
                     }
                 }

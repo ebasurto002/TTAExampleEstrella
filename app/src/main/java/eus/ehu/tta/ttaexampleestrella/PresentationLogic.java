@@ -12,10 +12,10 @@ import java.util.Arrays;
 public class PresentationLogic implements PresentationIface {
 
     private Test [] tests;
-    private static int numTest;
+    private static int numTest = 0;
 
     public PresentationLogic(){
-        numTest = 0;
+
 
         tests = new Test[]{new Test("¿Cuál de las siguientes opciones NO se indica en el fichero de manifiesto de la app?",
                 new ArrayList<String>(Arrays.asList("Versión de la aplicación","Listado de componentes de la aplicación","Opciones del menú de ajustes","Nivel mínimo de la API de Android requerida","Nombre del paquete java de la aplicación")),
