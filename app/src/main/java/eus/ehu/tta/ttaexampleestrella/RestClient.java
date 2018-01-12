@@ -5,8 +5,10 @@ import android.util.Base64;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
@@ -50,8 +52,19 @@ public class RestClient {
     }
 
     public String getString(String path) throws IOException{
-        String string = "";
-        return string;
+        HttpURLConnection c = null;
+
+        try{
+            c = getConnection(path, "GET");
+            try(BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()))){
+                return br.readLine();
+            }
+        }
+        finally{
+            if(c != null){
+                c.disconnect();
+            }
+        }
     }
 
     public JSONObject getJson(String path) throws IOException , JSONException{
@@ -65,8 +78,15 @@ public class RestClient {
     }
 
     public int postJson(final JSONObject json, String path) throws IOException{
-        int i = 0;
-        return i;
+        HttpURLConnection c = null;
+
+        try{
+            c = getConnection(path, "POST");
+        }finally{
+            if(c != null){
+                c.disconnect();
+            }
+        }
     }
 
 
