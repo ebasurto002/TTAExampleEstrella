@@ -23,6 +23,7 @@ import java.io.IOException;
 public class TestActivity extends AppCompatActivity{
 
     private Test test;
+    private int correctAns;
     private PresentationIface presentation;
 
     @Override
@@ -34,11 +35,16 @@ public class TestActivity extends AppCompatActivity{
         TextView wording = (TextView)findViewById(R.id.exWording);
         wording.setText(test.getWording());
         RadioGroup rGroup = (RadioGroup)findViewById(R.id.testChoices);
-        for(String choice : test.getChoices()){
+        int i = 0;
+        for(Test.Choice choice : test.getChoices()){
             RadioButton button = new RadioButton(this);
-            button.setText(choice);
+            button.setText(choice.getAnswer());
             button.setOnClickListener(new OnClickRadioButton());
             rGroup.addView(button);
+            if(choice.getCorrect()){
+                correctAns= i;
+            }
+            i++;
         }
     }
 
@@ -46,24 +52,24 @@ public class TestActivity extends AppCompatActivity{
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.testLayout);
         Button helpBtn = new Button(this);
         helpBtn.setText(R.string.helpBtn);
-        helpBtn.setOnClickListener(new OnClickHelp());
+        helpBtn.setOnClickListener(new OnClickHelp(correctAns));
         linearLayout.addView(helpBtn);
     }
 
-    public void showHTML(){
-        if(test.getHelp().substring(0,10).contains("://")){
-            Uri uri = Uri.parse(test.getHelp());
+    public void showHTML(int i){
+        if(test.getChoices().get(i).getAdvise().substring(0,10).contains("://")){
+            Uri uri = Uri.parse(test.getChoices().get(i).getAdvise());
             Intent intent = new Intent(Intent.ACTION_VIEW,uri);
             startActivity(intent);
         }
         else{
             LinearLayout linearLayout = (LinearLayout)findViewById(R.id.testLayout);
             WebView web = new WebView(this);
-            web.loadData(test.getHelp(),"text/html",null);
+            web.loadData(test.getChoices().get(i).getAdvise(),"text/html",null);
             linearLayout.addView(web);
         }
     }
-    public void playAudio(){
+    public void playAudio(int i){
         AudioPlayer audioPlayer = new AudioPlayer(findViewById(R.id.testLayout), new Runnable(){
             @Override
             public void run(){
@@ -71,18 +77,18 @@ public class TestActivity extends AppCompatActivity{
             }
         });
         try{
-            audioPlayer.setAudioUri(Uri.parse(test.getHelp()));
+            audioPlayer.setAudioUri(Uri.parse(test.getChoices().get(i).getAdvise()));
         }
         catch(IOException e){
 
         }
 
     }
-    public void playVideo(){
+    public void playVideo(int i){
         VideoView video = new VideoView(this);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         video.setLayoutParams(layoutParams);
-        video.setVideoURI(Uri.parse(test.getHelp()));
+        video.setVideoURI(Uri.parse(test.getChoices().get(i).getAdvise()));
 
         MediaController controller = new MediaController(this){
             @Override
@@ -108,22 +114,21 @@ public class TestActivity extends AppCompatActivity{
 
     private class OnClickHelp implements View.OnClickListener{
 
-        public OnClickHelp(){
-
+        private int helpForChild;
+        public OnClickHelp(int i){
+            this.helpForChild = i;
         }
         @Override
         public void onClick(View view){
-            String type = test.getMimeType();
-            switch(type){
-                case "text/html":
-                    showHTML();
-                    break;
-                case "audio/mp4":
-                    playAudio();
-                    break;
-                case "video/mp4":
-                    playVideo();
-                    break;
+            String type = test.getChoices().get(helpForChild).getMimeType();
+            if(type.contains("html")){
+                showHTML(helpForChild);
+            }
+            else if(type.contains("audio")){
+                playAudio(helpForChild);
+            }
+            else{
+                playVideo(helpForChild);
             }
         }
     }
@@ -139,7 +144,7 @@ public class TestActivity extends AppCompatActivity{
             for(int i=0; i<radioGroup.getChildCount(); i++){
                 RadioButton button = (RadioButton) radioGroup.getChildAt(i);
                 if(button.isChecked()){
-                    if(test.getCorrect() == i){
+                    if(correctAns == i){
                         button.setBackgroundColor(Color.GREEN);
                         Toast.makeText(TestActivity.this,R.string.cAns,Toast.LENGTH_SHORT).show();
                     }
@@ -150,7 +155,7 @@ public class TestActivity extends AppCompatActivity{
                     }
                 }
             }
-            RadioButton radioButton = (RadioButton)radioGroup.getChildAt(test.getCorrect());
+            RadioButton radioButton = (RadioButton)radioGroup.getChildAt(correctAns);
             radioButton.setBackgroundColor(Color.GREEN);
         }
 
