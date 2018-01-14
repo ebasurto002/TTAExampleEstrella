@@ -31,8 +31,18 @@ public class ExerciseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
         this.presentation = new PresentationLogic();
-        TextView exWording = (TextView)findViewById(R.id.nExWording);
-        exWording.setText((CharSequence) presentation.getExWording());
+        new ProgressTask<String>(this){
+            @Override
+            public String work(){
+                return presentation.getExWording();
+            }
+            @Override
+            public void onFinish(String result){
+                TextView exWording = (TextView)findViewById(R.id.nExWording);
+                exWording.setText((CharSequence) result);
+            }
+        }.execute();
+
     }
 
     public void selectFile2Upload(View view){

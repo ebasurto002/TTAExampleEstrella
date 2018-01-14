@@ -10,9 +10,7 @@ public interface PresentationIface {
 
     public abstract boolean authenticateUser(String uName, String psswd);
     public abstract boolean uploadFile(Uri uri);
-    public abstract boolean takePic();
-    public abstract boolean recordAud();
-    public abstract boolean recordVid();
+    public abstract void getStatus();
     public abstract boolean sendChoice();
     public abstract String getExWording();
     public abstract Test getNewTest();

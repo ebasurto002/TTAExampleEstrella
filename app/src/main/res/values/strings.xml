@@ -19,4 +19,8 @@
     <string name="helpBtn">VER AYUDA</string>
     <string name="cAns">¡Correcto!</string>
     <string name="fAns">Has fallado, mira la ayuda</string>
+    <string name="uname">Nombre: </string>
+    <string name="title">Lección: </string>
+    <string name="nextTest2Do">Próximo Test: </string>
+    <string name="nextEx2Do">Próximo Ejercicio: </string>
 </resources>

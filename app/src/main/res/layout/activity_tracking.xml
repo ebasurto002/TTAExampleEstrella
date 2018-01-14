@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="eus.ehu.tta.ttaexampleestrella.TrackingActivity"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2">
+        <TextView android:text="@string/uname"/>
+        <TextView android:id="@+id/uname"/>
+        <TextView android:text="@string/title"/>
+        <TextView android:id="@+id/title"/>
+        <TextView android:text="@string/nextTest2Do"/>
+        <TextView android:id="@+id/nextTest2Do"/>
+        <TextView android:text="@string/nextEx2Do"/>
+        <TextView android:id="@+id/nextEx2Do"/>
+    </GridLayout>
+
+</LinearLayout>

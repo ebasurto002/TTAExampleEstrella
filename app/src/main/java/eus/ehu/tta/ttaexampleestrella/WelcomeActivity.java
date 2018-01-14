@@ -30,6 +30,7 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void getTracking(View view){
-
+        Intent intent = new Intent(this, TrackingActivity.class);
+        startActivity(intent);
     }
 }

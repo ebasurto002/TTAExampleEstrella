@@ -35,22 +35,10 @@ public class PresentationLogic implements PresentationIface {
         return true;
     }
 
-    @Override
-    public boolean takePic(){
-
-        return true;
-    }
 
     @Override
-    public boolean recordAud(){
+    public void getStatus(){
 
-        return true;
-    }
-
-    @Override
-    public boolean recordVid(){
-
-        return true;
     }
 
     @Override
@@ -59,7 +47,19 @@ public class PresentationLogic implements PresentationIface {
         return true;
     }
     public String getExWording(){
-        return "Explica cómo aplicarías el patrón de diseño MVP en el desarrollo de una app para Android";
+        try{
+            rest.setHttpBasicAuth("12345678A", "tta");
+            JSONObject json = rest.getJson("getExercise?id=1");
+            String wording = json.getString("wording");
+            return wording;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
     public Test getNewTest(){
 
