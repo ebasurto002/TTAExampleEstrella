@@ -9,60 +9,84 @@ import java.util.List;
 public class Test {
 
     private String wording;
-    private List<String> choices;
-    private int exID;
-    private int correct;
-    private String help;
-    private String mimeType;
+    private List<Choice> choices;
 
 
-    public Test(String wording, List<String> choices, int exID, int correct, String help, String mimeType){
+
+    public Test(String wording, List<Choice> choices){
         this.wording=wording;
-        this.choices=choices;
-        this.exID=exID;
-        this.correct=correct;
-        this.help=help;
-        this.mimeType=mimeType;
+        this.choices = choices;
+
+    }
+    public Test(){
+
     }
 
     public String getWording(){
+
         return wording;
     }
     public void setWording(String wording){
-
+        this.wording=wording;
     }
-    public List<String> getChoices(){
+
+    public List<Choice> getChoices(){
         return choices;
     }
-    public void setChoices(List<String> choices){
-
-    }
-    public String getHelp(){
-        return help;
-    }
-    public void setHelp(String help){
-
-    }
-    public String getMimeType(){
-        return mimeType;
-    }
-    public void setMimeType(String mimeType){
-
+    public void setChoices(List<Choice> choices){
+        this.choices = choices;
     }
 
-    public int getExID() {
-        return exID;
-    }
+    public class Choice{
 
-    public void setExID(int exID) {
-        this.exID = exID;
-    }
+        protected int id;
+        protected String advise;
+        protected String answer;
+        protected boolean correct;
+        protected String mimeType;
 
-    public int getCorrect() {
-        return correct;
-    }
+        public Choice(){
 
-    public void setCorrect(int correct) {
-        this.correct = correct;
+        }
+
+        public int getId(){
+            return this.id;
+        }
+
+        public void setId(int id){
+            this.id=id;
+        }
+
+        public String getAdvise(){
+            return this.advise;
+        }
+
+        public void setAdvise(String advise){
+            this.advise=advise;
+        }
+
+        public String getAnswer(){
+            return this.answer;
+        }
+
+        public void setAnswer(String answer){
+            this.answer = answer;
+        }
+
+        public boolean getCorrect(){
+            return this.correct;
+        }
+
+        public void setCorrect(boolean correct){
+            this.correct=correct;
+        }
+
+        public String getMimeType(){
+            return this.mimeType;
+        }
+
+        public void setMimeType(String mimeType){
+            this.mimeType=mimeType;
+        }
     }
 }
