@@ -31,7 +31,17 @@ public class TestActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         presentation = new PresentationLogic();
-        test = presentation.getNewTest();
+        //test = presentation.getNewTest();
+        new ProgressTask<Test>(this){
+            @Override
+            protected Test work(){
+                return presentation.getNewTest();
+            }
+            protected void onFinish(Test result){
+                test=result;
+            }
+
+        }.execute();
         TextView wording = (TextView)findViewById(R.id.exWording);
         wording.setText(test.getWording());
         RadioGroup rGroup = (RadioGroup)findViewById(R.id.testChoices);

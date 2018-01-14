@@ -13,7 +13,7 @@ public interface PresentationIface {
     public abstract boolean takePic();
     public abstract boolean recordAud();
     public abstract boolean recordVid();
-    public abstract boolean sendExercise();
+    public abstract boolean sendChoice();
     public abstract String getExWording();
     public abstract Test getNewTest();
 }

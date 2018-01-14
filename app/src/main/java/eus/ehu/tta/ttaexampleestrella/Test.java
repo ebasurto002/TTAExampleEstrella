@@ -37,13 +37,13 @@ public class Test {
         this.choices = choices;
     }
 
-    public class Choice{
+    public static class Choice{
 
-        protected int id;
-        protected String advise;
-        protected String answer;
-        protected boolean correct;
-        protected String mimeType;
+        private int id;
+        private String advise;
+        private String answer;
+        private boolean correct;
+        private String mimeType;
 
         public Choice(){
 
