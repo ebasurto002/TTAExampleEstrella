@@ -1,12 +1,17 @@
 package eus.ehu.tta.ttaexampleestrella;
 
+import android.content.Context;
 import android.net.Uri;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,7 +35,14 @@ public class PresentationLogic implements PresentationIface {
     }
 
     @Override
-    public boolean uploadFile(Uri uri){
+    public boolean uploadFile(Uri uri, Context c){
+        try{
+            InputStream is = c.getContentResolver().openInputStream(uri);
+
+        }
+        catch (FileNotFoundException fne){
+            fne.printStackTrace();
+        }
 
         return true;
     }

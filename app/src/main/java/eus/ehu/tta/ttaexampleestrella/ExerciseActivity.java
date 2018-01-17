@@ -116,12 +116,40 @@ public class ExerciseActivity extends AppCompatActivity {
             case VIDEO_REQUEST_CODE:
             case AUDIO_REQUEST_CODE:
             case READ_REQUEST_CODE:
-                Uri uri = data.getData();
+               final  Uri uri = data.getData();
                 showMetadata(uri);
-                presentation.uploadFile(data.getData());
+                new ProgressTask<Boolean>(ExerciseActivity.this){
+                    @Override
+                    public Boolean work(){
+                        return presentation.uploadFile(uri, ExerciseActivity.this);
+                    }
+                    public void onFinish(Boolean result){
+                        if(result.booleanValue() == true){
+                            Toast.makeText(ExerciseActivity.this, R.string.onUploadSuccess,Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(ExerciseActivity.this, R.string.onUploadFail,Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }.execute();
                 break;
             case PICTURE_REQUEST_CODE:
-                presentation.uploadFile(picUri);
+                new ProgressTask<Boolean>(ExerciseActivity.this){
+                    @Override
+                    public Boolean work(){
+                        return presentation.uploadFile(picUri, ExerciseActivity.this);
+                    }
+                    public void onFinish(Boolean result){
+                        if(result.booleanValue() == true){
+                            Toast.makeText(ExerciseActivity.this, R.string.onUploadSuccess,Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(ExerciseActivity.this, R.string.onUploadFail,Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }.execute();
                 break;
         }
     }
