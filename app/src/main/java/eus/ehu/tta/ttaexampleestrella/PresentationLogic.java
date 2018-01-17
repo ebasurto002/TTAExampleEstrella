@@ -53,7 +53,8 @@ public class PresentationLogic implements PresentationIface {
     }
 
     @Override
-    public boolean sendChoice(){
+    public boolean sendChoice(JSONObject choice){
+        rest.setHttpBasicAuth("12345678A", "tta");
 
         return true;
     }

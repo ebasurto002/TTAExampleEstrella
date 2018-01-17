@@ -18,6 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 public class TestActivity extends AppCompatActivity{
@@ -150,10 +153,37 @@ public class TestActivity extends AppCompatActivity{
         }
         @Override
         public void onClick(View view){
+
             RadioGroup radioGroup = (RadioGroup)findViewById(R.id.testChoices);
             for(int i=0; i<radioGroup.getChildCount(); i++){
                 RadioButton button = (RadioButton) radioGroup.getChildAt(i);
+                final Test.Choice choice = test.getChoices().get(i);
                 if(button.isChecked()){
+                    new ProgressTask<Boolean>(TestActivity.this){
+                        @Override
+                        protected Boolean work(){
+                            try {
+                                JSONObject json = new JSONObject();
+                                json.put("userId", 1);
+                                json.put("choiceId", choice.getId());
+                                return presentation.sendChoice(json);
+                            }
+                            catch (JSONException je){
+                                je.printStackTrace();
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void onFinish(Boolean result){
+                            if(result.booleanValue() == true){
+                                Toast.makeText(TestActivity.this, R.string.onSendSuccess,Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(TestActivity.this, R.string.onSendFail, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }.execute();
                     if(correctAns == i){
                         button.setBackgroundColor(Color.GREEN);
                         Toast.makeText(TestActivity.this,R.string.cAns,Toast.LENGTH_SHORT).show();

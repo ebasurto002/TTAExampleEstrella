@@ -13,7 +13,7 @@ public interface PresentationIface {
     public abstract boolean authenticateUser(String uName, String psswd);
     public abstract boolean uploadFile(Uri uri);
     public abstract JSONObject getStatus();
-    public abstract boolean sendChoice();
+    public abstract boolean sendChoice(JSONObject choice);
     public abstract String getExWording();
     public abstract Test getNewTest();
 }

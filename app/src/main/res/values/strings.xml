@@ -23,4 +23,8 @@
     <string name="title">Lección: </string>
     <string name="nextTest2Do">Próximo Test: </string>
     <string name="nextEx2Do">Próximo Ejercicio: </string>
+    <string name="onSendSuccess">Opción enviada con éxito</string>
+    <string name="onSendFail">Error al enviar opción</string>
+    <string name="onUploadSuccess">Subido con éxito</string>
+    <string name="onUploadFail">Error al subir</string>
 </resources>
