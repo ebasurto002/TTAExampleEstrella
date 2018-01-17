@@ -55,8 +55,20 @@ public class PresentationLogic implements PresentationIface {
     @Override
     public boolean sendChoice(JSONObject choice){
         rest.setHttpBasicAuth("12345678A", "tta");
+        try {
+            int i = rest.postJson(choice, "postChoice");
+            if(i == 200| i== 204){
+                return true;
+            }
+            else{
+                return false;
+            }
 
-        return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
     public String getExWording(){
         try{
