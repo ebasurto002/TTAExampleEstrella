@@ -114,6 +114,7 @@ public class RestClient {
             c.setDoOutput(true);
             try(PrintWriter pw = new PrintWriter(c.getOutputStream())){
                 pw.print(json.toString());
+                pw.close();
                 return c.getResponseCode();
             }
         }finally{

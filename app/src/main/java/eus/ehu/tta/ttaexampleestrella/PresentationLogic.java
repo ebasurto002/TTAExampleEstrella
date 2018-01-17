@@ -37,8 +37,19 @@ public class PresentationLogic implements PresentationIface {
 
 
     @Override
-    public void getStatus(){
-
+    public JSONObject getStatus(){
+        try {
+            rest.setHttpBasicAuth("12345678A", "tta");
+            JSONObject json = rest.getJson("getStatus?dni=12345678A");
+            return json;
+        }
+        catch (JSONException je){
+            je.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
