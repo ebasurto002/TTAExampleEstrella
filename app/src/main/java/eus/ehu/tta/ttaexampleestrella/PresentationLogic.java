@@ -100,7 +100,12 @@ public class PresentationLogic implements PresentationIface {
                 choice.setAnswer(item.getString("answer"));
                 choice.setCorrect(item.getBoolean("correct"));
                 choice.setAdvise(item.optString("advise",null));
-                choice.setMimeType(item.optString("mime",null));
+                if(!item.isNull("resourceType")) {
+                    choice.setMimeType(item.getJSONObject("resourceType").optString("mime", null));
+                }
+                else{
+                    choice.setMimeType(null);
+                }
                 test.getChoices().add(choice);
             }
             return test;

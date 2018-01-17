@@ -42,30 +42,31 @@ public class TestActivity extends AppCompatActivity{
             }
             protected void onFinish(Test result){
                 test=result;
+                TextView wording = (TextView)findViewById(R.id.exWording);
+                wording.setText(test.getWording());
+                RadioGroup rGroup = (RadioGroup)findViewById(R.id.testChoices);
+                int i = 0;
+                for(Test.Choice choice : test.getChoices()){
+                    RadioButton button = new RadioButton(TestActivity.this);
+                    button.setText(choice.getAnswer());
+                    button.setOnClickListener(new OnClickRadioButton());
+                    rGroup.addView(button);
+                    if(choice.getCorrect()){
+                        correctAns= i;
+                    }
+                    i++;
+                }
             }
 
         }.execute();
-        TextView wording = (TextView)findViewById(R.id.exWording);
-        wording.setText(test.getWording());
-        RadioGroup rGroup = (RadioGroup)findViewById(R.id.testChoices);
-        int i = 0;
-        for(Test.Choice choice : test.getChoices()){
-            RadioButton button = new RadioButton(this);
-            button.setText(choice.getAnswer());
-            button.setOnClickListener(new OnClickRadioButton());
-            rGroup.addView(button);
-            if(choice.getCorrect()){
-                correctAns= i;
-            }
-            i++;
-        }
+
     }
 
-    public void createHelpButton(){
+    public void createHelpButton(int i){
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.testLayout);
         Button helpBtn = new Button(this);
         helpBtn.setText(R.string.helpBtn);
-        helpBtn.setOnClickListener(new OnClickHelp(correctAns));
+        helpBtn.setOnClickListener(new OnClickHelp(i));
         linearLayout.addView(helpBtn);
     }
 
@@ -191,7 +192,7 @@ public class TestActivity extends AppCompatActivity{
                     else{
                         button.setBackgroundColor(Color.RED);
                         Toast.makeText(TestActivity.this,R.string.fAns,Toast.LENGTH_SHORT).show();
-                        createHelpButton();
+                        createHelpButton(i);
                     }
                 }
             }

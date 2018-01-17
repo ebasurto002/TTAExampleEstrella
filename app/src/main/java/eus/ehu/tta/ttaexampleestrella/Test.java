@@ -1,5 +1,6 @@
 package eus.ehu.tta.ttaexampleestrella;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class Test {
 
     }
     public Test(){
-
+        choices = new ArrayList<Choice>();
     }
 
     public String getWording(){
