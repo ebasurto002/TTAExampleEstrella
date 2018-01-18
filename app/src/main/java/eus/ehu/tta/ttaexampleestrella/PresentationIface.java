@@ -12,7 +12,7 @@ import org.json.JSONObject;
 public interface PresentationIface {
 
     public abstract boolean authenticateUser(String uName, String psswd);
-    public abstract boolean uploadFile(Uri uri, Context c);
+    public abstract boolean uploadFile(Uri uri, Context c, String filename);
     public abstract JSONObject getStatus();
     public abstract boolean sendChoice(JSONObject choice);
     public abstract String getExWording();

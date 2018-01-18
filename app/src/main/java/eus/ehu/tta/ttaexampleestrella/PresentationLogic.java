@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -35,16 +36,26 @@ public class PresentationLogic implements PresentationIface {
     }
 
     @Override
-    public boolean uploadFile(Uri uri, Context c){
+    public boolean uploadFile(Uri uri, Context c, String filename){
         try{
             InputStream is = c.getContentResolver().openInputStream(uri);
+            int i = rest.postFile("postExercise?user=1&id=1",is,filename);
+            if(i== HttpURLConnection.HTTP_NO_CONTENT){
+                return true;
+            }
+            else {
+                return false;
+            }
 
         }
         catch (FileNotFoundException fne){
             fne.printStackTrace();
         }
+        catch (IOException e){
+            e.printStackTrace();
+        }
 
-        return true;
+        return false;
     }
 
 

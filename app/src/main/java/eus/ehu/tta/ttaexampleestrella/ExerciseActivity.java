@@ -117,11 +117,11 @@ public class ExerciseActivity extends AppCompatActivity {
             case AUDIO_REQUEST_CODE:
             case READ_REQUEST_CODE:
                final  Uri uri = data.getData();
-                showMetadata(uri);
+                final String filename = showMetadata(uri);
                 new ProgressTask<Boolean>(ExerciseActivity.this){
                     @Override
                     public Boolean work(){
-                        return presentation.uploadFile(uri, ExerciseActivity.this);
+                        return presentation.uploadFile(uri, ExerciseActivity.this, filename);
                     }
                     public void onFinish(Boolean result){
                         if(result.booleanValue() == true){
@@ -135,10 +135,12 @@ public class ExerciseActivity extends AppCompatActivity {
                 }.execute();
                 break;
             case PICTURE_REQUEST_CODE:
+
+                final String filenameimg = showMetadata(picUri);
                 new ProgressTask<Boolean>(ExerciseActivity.this){
                     @Override
                     public Boolean work(){
-                        return presentation.uploadFile(picUri, ExerciseActivity.this);
+                        return presentation.uploadFile(picUri, ExerciseActivity.this,filenameimg);
                     }
                     public void onFinish(Boolean result){
                         if(result.booleanValue() == true){
@@ -154,11 +156,12 @@ public class ExerciseActivity extends AppCompatActivity {
         }
     }
 
-    public void showMetadata(Uri uri){
+    public String showMetadata(Uri uri){
         Cursor cursor = getContentResolver().query(uri,null, null, null, null, null);
+        String displayName = null;
         try{
             if(cursor != null && cursor.moveToFirst()){
-                String displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                 int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
                 String size = null;
                 if(!cursor.isNull(sizeIndex)){
@@ -169,11 +172,12 @@ public class ExerciseActivity extends AppCompatActivity {
                 }
                 String message = displayName + " ("+ size +" bytes) selected";
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+
             }
         }
         finally{
             cursor.close();
         }
-
+        return displayName;
     }
 }
